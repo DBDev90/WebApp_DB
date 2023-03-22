@@ -18,6 +18,11 @@ namespace WebApp_DB.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
