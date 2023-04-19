@@ -32,7 +32,18 @@ namespace WebApp_DB.Controllers
         [HttpPost]
         public IActionResult SalvarDados(ClienteViewModel model)
         {
-            lista.Add(model);
+            if (model.Id > 0)
+            {
+                int cliente = lista.FindIndex(a => a.Id == model.Id);
+                lista[cliente] = model;
+            }
+            else
+            {
+                Random random = new Random();
+                model.Id = random.Next(1, 999);
+                lista.Add(model);
+            }
+            
             return RedirectToAction("Lista");
         }
 
@@ -54,7 +65,16 @@ namespace WebApp_DB.Controllers
 
         public IActionResult Editar(int id)
         {
-            return View();
+            ClienteViewModel cliente = lista.Find(x => x.Id == id);
+            if (cliente != null)
+            {
+                return View(cliente);
+            }
+            else
+            {
+                return RedirectToAction("Lista");
+            }
+            
         }
 
         public IActionResult Excluir(int id)
