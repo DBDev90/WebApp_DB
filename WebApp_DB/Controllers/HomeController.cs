@@ -7,10 +7,12 @@ namespace WebApp_DB.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Contexto db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(Contexto db,ILogger<HomeController> logger)
         {
             _logger = logger;
+            this.db = db;
         }
 
         public IActionResult BemVindo()
@@ -25,7 +27,7 @@ namespace WebApp_DB.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(db.Produto.ToList());
         }
 
         public IActionResult Privacy()
