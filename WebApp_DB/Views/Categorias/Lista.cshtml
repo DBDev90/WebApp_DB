@@ -1,0 +1,5 @@
+﻿@model List<WebApp_DB.Entidades.Categoria>
+
+    @foreach(var categoria in Model){
+        <p>@categoria.Nome - @categoria.Id</p>
+    }
