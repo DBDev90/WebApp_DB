@@ -1,5 +1,59 @@
 ﻿@model List<WebApp_DB.Entidades.Categoria>
 
-    @foreach(var categoria in Model){
-        <p>@categoria.Nome - @categoria.Id</p>
-    }
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            Lista de Categorias
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <form action="/Categorias/Lista" method="get" class="d-flex gap-1">
+                    <div class="col-2">
+                        <a class="btn btn-success" href="/Categorias/Cadastro">Nova Categoria</a>
+                    </div>
+                    <div class="col-5">
+                        <input name="busca" class="form-control" type="text" />   
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </div>
+                </form>
+            </div>
+            
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CATEGORIA</th>
+                        <th>ATIVO</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var categoria in Model)
+                    {
+                        <tr>
+                            <td>@categoria.Id</td>
+                            <td>@categoria.Nome</td>
+                            <td>
+                                @if (categoria.Ativo)
+                                {
+                                    <input type="checkbox" checked="checked" disable>
+                                }
+                                else{
+                                    <input type="checkbox" disable>
+                                }
+                             </td>
+                             <td>
+                                <a type="button" class="btn btn-warning" href="/Categorias/Editar/@categoria.Id">Editar</a>
+                                <a type="button" class="btn btn-danger" href="/Categorias/Excluir/@categoria.Id">Excluir</a>
+                             </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
