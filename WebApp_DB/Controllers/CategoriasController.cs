@@ -31,19 +31,42 @@ namespace WebApp_DB.Controllers
             entidade.Id = dados.Id;
             entidade.Ativo = dados.Ativo == "on" ? true : false;
 
-            db.Categorias.Add(entidade);
-            db.SaveChanges();
+            if(entidade.Id > 0)
+            {
+                db.Categorias.Update(entidade);
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Categorias.Add(entidade);
+                db.SaveChanges();
+            }
+            
             return RedirectToAction("Lista");
         }
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            Categoria item = db.Categorias.Find(id);
+
+            if (item != null)
+            {
+                return View(item);
+            }
+            else
+            {
+                return RedirectToAction("Lista");
+            }
         }
 
         public IActionResult Excluir(int id)
         {
-
+            Categoria item = db.Categorias.Find(id);
+            if(item != null)
+            {
+                db.Categorias.Remove(item);
+                db.SaveChanges();
+            }
             return RedirectToAction("Lista");
         }
     }

@@ -1,1 +1,34 @@
-﻿
+﻿@model WebApp_DB.Entidades.Categoria
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Edição de Categoria</h4>
+            </div>
+            <div class="card-body">
+                <form action="/Categorias/SalvarDados" method="post">
+                    <label>ID</label>
+                    <input type="text" readonly name="Id" value="@Model.Id" class="form-control"/>
+                    <br />
+
+                    <label>CATEGORIA</label>
+                    <input type="text" name="Nome" value="@Model.Nome" class="form-control" />
+                    <br />
+
+                    <label>ATIVO</label>
+                    @if (Model.Ativo)
+                    {
+                        <input type="checkbox" checked name="Ativo" />
+                    }
+                    else{
+                        <input type="checkbox" name="Ativo" />                        
+                    }
+                    <br />
+
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
