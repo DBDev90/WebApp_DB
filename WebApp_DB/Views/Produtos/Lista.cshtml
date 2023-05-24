@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<WebApp_DB.Entidades.Produtos>
+
+<div class="card">
+    <div class="card-header">
+        Lista de Usuários
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Descrição do Produto
+                    </th>
+                    <th>
+                        Valor
+                    </th>
+                    <th>
+                        Categoria
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var produto in Model)
+                {
+                    <tr>
+                        <td>
+                            @produto.Id
+                        </td>
+                        <td>
+                            @produto.Descricao
+                        </td>
+                        <td>
+                            @produto.Valor
+                        </td>
+                        <td>
+                            @produto.Categoria.Nome
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

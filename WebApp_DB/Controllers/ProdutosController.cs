@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp_DB.Entidades;
 using WebApp_DB.Models;
 
@@ -13,7 +14,9 @@ namespace WebApp_DB.Controllers
         }
         public IActionResult Lista()
         {
-            return View();
+            List<Produtos> model = new List<Produtos>();
+            model = db.Produtos.Include(a => a.Categoria).ToList();
+            return View(model);
         }
         public IActionResult Cadastro()
         {
